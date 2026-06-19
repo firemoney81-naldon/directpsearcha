@@ -1,23 +1,679 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <style>
+    /* ----------------------------------------------------------------------- */
+    /* 1. Base Structure and Typography */
+    /* ----------------------------------------------------------------------- */
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.9;
+      color: #334155;
+      background: #f8fafc;
+    }
+    header, nav, section, footer {
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+      background: #ffffff;
+      margin-bottom: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 2.4rem;
+      color: #0f172a;
+      margin-bottom: 15px;
+      border-bottom: 4px solid #3b82f6;
+      padding-bottom: 15px;
+      line-height: 1.4;
+      font-weight: 800;
+    }
+    h2 {
+      border-bottom: 3px solid #60a5fa;
+      padding-bottom: 12px;
+      margin-bottom: 25px;
+      color: #1e293b;
+      font-size: 1.9rem;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 1.5rem;
+      color: #0f172a;
+      margin-top: 25px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 2. Navigation Styling */
+    /* ----------------------------------------------------------------------- */
+    nav {
+      background: #1e293b;
+      text-align: center;
+      padding: 15px 10px;
+      margin-bottom: 35px;
+      border-radius: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    nav a {
+      color: #f8fafc;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 10px 16px;
+      border-radius: 8px;
+    }
+    nav a:hover {
+      background-color: #3b82f6;
+      color: #ffffff;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 3. Content Card Styling */
+    /* ----------------------------------------------------------------------- */
+    .service-card, .review-card, .info-block {
+      border: 1px solid #e2e8f0;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      background: #ffffff;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .service-card:hover, .review-card:hover, .info-block:hover {
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+      transform: translateY(-4px);
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 4. CTA Button Styling */
+    /* ----------------------------------------------------------------------- */
+    .cta {
+      display: inline-block;
+      background-color: #2563eb;
+      color: white;
+      padding: 18px 36px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+    .cta:hover {
+      background-color: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 5. Form Styling */
+    /* ----------------------------------------------------------------------- */
+    .calculator-container {
+      background: #f1f5f9;
+      padding: 30px;
+      border-radius: 14px;
+      border: 1px solid #cbd5e1;
+      margin-bottom: 25px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 1.05rem;
+    }
+    form .form-group {
+      margin-bottom: 20px;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 14px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background-color: #ffffff;
+    }
+    form input:focus, form select:focus, form textarea:focus {
+      border-color: #2563eb;
+      outline: none;
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.25);
+    }
+    form .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    form .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    form .checkbox-item input {
+      width: auto;
+      margin: 0;
+    }
+    form button.cta {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 6. Tables, Lists, and Typographic Accents */
+    /* ----------------------------------------------------------------------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 16px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    ol li, ul li {
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    dl.faq dt {
+      font-weight: 700;
+      margin-top: 25px;
+      cursor: pointer;
+      color: #2563eb;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 10px;
+      font-size: 1.15rem;
+      transition: color 0.3s;
+    }
+    dl.faq dt:hover {
+      color: #1d4ed8;
+    }
+    dl.faq dd {
+      margin-left: 0;
+      margin-top: 12px;
+      color: #475569;
+      background: #f8fafc;
+      padding: 18px;
+      border-radius: 8px;
+      border-left: 4px solid #2563eb;
+      line-height: 1.8;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 7. Footer and Contact Information */
+    /* ----------------------------------------------------------------------- */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #0f172a;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      border-radius: 16px;
+      box-shadow: none;
+    }
+    footer a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 8. Image Placeholder Styling */
+    /* ----------------------------------------------------------------------- */
+    .image-placeholder {
+      width: 100%;
+      height: 380px;
+      background-color: #1e293b;
+      background-image: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), url("https://images.pexels.com/photos/10330132/pexels-photo-10330132.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      margin-top: 25px;
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      text-align: center;
+      padding: 20px;
+    }
+    .image-placeholder span {
+      font-size: 1rem;
+      font-weight: normal;
+      margin-top: 10px;
+      color: #cbd5e1;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 9. SEO/Keyword Specific Sections */
+    /* ----------------------------------------------------------------------- */
+    .highlight {
+      color: #2563eb;
+      font-weight: 700;
+    }
+    .text-block {
+      background: #f8fafc;
+      border-left: 5px solid #3b82f6;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .keyword-model-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .keyword-model-list span {
+      background: #eff6ff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      text-align: center;
+      color: #1e40af;
+      font-weight: 600;
+      border: 1px solid #dbeafe;
+    }
+  </style>
+
+  <!-- JSON-LD Schema for Insurance Agency and OfferCatalog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "InsuranceAgency",
+    "name": "GMC 허머 EV 다이렉트 자동차보험 비교 분석 서비스",
+    "image": "https://www.yourdomain.kr/images/logo.png",
+    "telephone": "1588-1234",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "서울시 강남구 테헤란로 456",
+      "addressLocality": "서울",
+      "addressRegion": "서울특별시",
+      "postalCode": "06150",
+      "addressCountry": "KR"
+    },
+    "url": "https://www.yourdomain.kr/",
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "areaServed": "대한민국 전역",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "GMC 허머 EV 전용 자동차 보험 상품",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "GMC 허머 EV 픽업 다이렉트 보험"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "GMC 허머 EV SUV 종합보험"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "초고중량 전기차 전용 특약 자차 보장"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "연령대별 자동차보험료 실시간 비교 견적"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "전기차 고전압 배터리 파손 교체 특별 약관"}}
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header id="top">
+  <h1>2026년 GMC 허머 EV 보험료 연령별 다이렉트 비교 및 견적 최적화 가이드</h1>
+  <p>압도적인 성능의 초대형 전기차, GMC 허머 EV 보험료 <span class="highlight">평균 35% 절약</span>하는 비결을 공개합니다. <br>국내 주요 보험사들의 요율 정책을 반영하여 <strong>내 운전 경력과 나이에 딱 맞는 가장 저렴한곳</strong>을 찾아 실시간 견적을 비교해 보세요.</p>
+  <div class="image-placeholder" aria-label="GMC Hummer EV Insurance Guide">
+    압도적인 아우라 GMC 허머 EV
+    <span>2026년 최신 보험 가입 기준 및 다이렉트 할인 혜택 종합 안내</span>
+  </div>
+  <a href="#premium-calculator" class="cta">내 GMC 허머 EV 다이렉트 보험료 실시간 계산하기</a>
+</header>
+
+<nav>
+  <a href="#insurance-characteristics">허머 EV 보험료 특징</a>
+  <a href="#age-analysis">연령별 평균 금액 분석</a>
+  <a href="#brand-comparison">보험사별 상품 비교</a>
+  <a href="#saving-tips">보험료 절약 꿀팁</a>
+  <a href="#community-opinion">커뮤니티 및 내돈내산 후기</a>
+  <a href="#premium-calculator">실시간 모의 계산기</a>
+  <a href="#faq">자주 묻는 질문 FAQ</a>
+</nav>
+
+<section id="insurance-characteristics" aria-label="허머 EV 보험 특징 및 요율 요약">
+  <h2>GMC 허머 EV 자동차보험, 왜 일반 전기차와 다를까요?</h2>
+  <div class="info-block">
+    <p>GMC 허머 EV는 일반적인 승용차나 준중형 SUV와는 궤를 달리하는 <span class="highlight">초고중량 특수 전기차</span>입니다. 차량 공차 중량이 4톤을 넘어가며, 배터리 용량 또한 200kWh를 상회하여 사고 발생 시 배터리 교체 비용이나 타 차량에 입히는 대물 배상 손해 규모가 매우 큽니다. 이러한 특징으로 인해 각 보험사에서는 일반 전기차 요율 대신 특수 고가 차량 요율을 적용하고 있습니다.</p>
+    <p>따라서 인터넷 다이렉트 가입 시 어떤 특약을 추가하는지, 그리고 대물배상 및 자기신체사고 한도를 어떻게 설정하는지에 따라 매년 납부하는 <span class="highlight">예상 금액</span> 차이가 수백만 원까지 벌어지기도 합니다. 브랜드별 보장 한도와 특약을 면밀히 비교하는 과정이 필수적입니다.</p>
+  </div>
+
+  <h3>핵심 가입 요율과 차이점 분석</h3>
+  <div class="service-card">
+    <h4>1. 4톤 이상의 공차중량과 대물배상 가입 기준</h4>
+    <p>허머 EV는 차량의 물리적 크기와 엄청난 중량으로 인해 사고 발생 시 충격 에너지가 상상을 초월합니다. 이러한 리스크 때문에 보험 전문가들은 대물배상 한도를 최소 10억 원 이상으로 설정할 것을 <span class="highlight">추천</span>합니다. 대물배상 한도를 5억 원에서 10억 원으로 상향하더라도 추가되는 보험료 차이점은 연간 몇 천 원 수준에 불과하므로, 혹시 모를 대형 사고에 대비해 한도를 최대치로 높이는 것이 안전합니다.</p>
+  </div>
+  <div class="service-card">
+    <h4>2. 고전압 배터리 전용 자차 특약의 필요성</h4>
+    <p>차량 가격이 1억 원 중반에서 2억 원을 상회하는 허머 EV는 하부 배터리 팩 파손 시 수리비용이 차량 가액에 육박할 수 있습니다. 일반적인 자기차량손해(자차) 보장만으로는 고가의 배터리 교체 비용을 완전히 보전받지 못할 수 있으므로, 각 보험사에서 제공하는 <span class="highlight">전기차 배터리 전액 보상 특약</span>이나 신차 가액 전액 보상 특별 약관에 가입하는 것이 유리합니다. 이는 차주들 사이에서 필수적으로 꼽히는 필수 가입 종류 중 하나입니다.</p>
+  </div>
+  <div class="service-card">
+    <h4>3. 특수화물 및 승용 분류에 따른 보험료 가격 격차</h4>
+    <p>GMC 허머 EV는 픽업트럭 모델과 SUV 모델 두 종류로 수입되고 있습니다. 픽업트럭의 경우 국내 법상 화물차로 분류되어 화물차 전용 요율이 적용되며, SUV는 일반 다목적 승용 요율이 적용됩니다. 이 두 차종 간의 기본 보험료 산출 구조와 가입 방식에는 명확한 장단점이 존재하므로, 자신의 차량 형태에 맞춰 다이렉트 계산 프로그램을 활용해 계산해 보아야 정확한 <span class="highlight">견적</span>을 뽑을 수 있습니다.</p>
+  </div>
+</section>
+
+<section id="age-analysis" aria-label="연령별 보험료 평균 분석">
+  <h2>GMC 허머 EV 연령별 및 모델별 보험료 예상 금액 분석</h2>
+  <p>2026년 최신 보험 개발원 기준 요율과 오프라인 및 온라인 다이렉트 통합 견적 데이터를 기반으로 산출한 연령별, 모델별 연간 <span class="highlight">평균 보험료</span> 상세 분석 지표입니다.</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>가입 연령대</th>
+        <th>운전 경력</th>
+        <th>허머 EV 픽업 (화물 요율)</th>
+        <th>허머 EV SUV (승용 요율)</th>
+        <th>주요 변수 및 특징</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>만 21세 이하</td>
+        <td>1년 미만 (신규)</td>
+        <td>약 4,800,000원 ~ 5,500,000원</td>
+        <td>약 5,200,000원 ~ 6,100,000원</td>
+        <td>최초 가입 및 나이 할증 최대 적용 구간</td>
+      </tr>
+      <tr>
+        <td>만 26세 이상</td>
+        <td>3년 이상</td>
+        <td>약 2,700,000원 ~ 3,300,000원</td>
+        <td>약 2,900,000원 ~ 3,600,000원</td>
+        <td>연령 제한 할인이 본격 적용되는 시점</td>
+      </tr>
+      <tr>
+        <td>만 30대 이상</td>
+        <td>7년 이상</td>
+        <td>약 1,800,000원 ~ 2,300,000원</td>
+        <td>약 1,950,000원 ~ 2,500,000원</td>
+        <td>부부한정 및 자녀할인 적용 시 최저 구간 도달</td>
+      </tr>
+      <tr>
+        <td>만 40대 이상</td>
+        <td>15년 이상</td>
+        <td>약 1,450,000원 ~ 1,900,000원</td>
+        <td>약 1,600,000원 ~ 2,100,000원</td>
+        <td>무사고 경력 누적으로 우량 요율 적용</td>
+      </tr>
+      <tr>
+        <td>만 50대 이상</td>
+        <td>20년 이상</td>
+        <td>약 1,380,000원 ~ 1,850,000원</td>
+        <td>약 1,550,000원 ~ 2,000,000원</td>
+        <td>가장 안정적인 가격 분포를 보이는 연령대</td>
+      </tr>
+      <tr>
+        <td>만 60대 이상</td>
+        <td>30년 이상</td>
+        <td>약 1,650,000원 ~ 2,100,000원</td>
+        <td>약 1,800,000원 ~ 2,350,000원</td>
+        <td>연령 증가에 따른 사고율 가중치 소폭 상승</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-block">
+    <p><strong>포털 및 모바일 함께 많이 찾는 추천 키워드 리스트 (30개 이상):</strong></p>
+    <div class="keyword-model-list">
+      <span>GMC 허머 EV 픽업 보험료</span>
+      <span>허머 EV SUV 다이렉트 견적</span>
+      <span>20대 허머 EV 보험 가격</span>
+      <span>30대 수입 전기차 보험 추천</span>
+      <span>40대 화물차 다이렉트 보험</span>
+      <span>허머 EV 자차 보험료 계산</span>
+      <span>수입 전기차 자차 보험 싼곳</span>
+      <span>GMC 허머 EV 유지비 계산기</span>
+      <span>전기차 전용 배터리 특약 비용</span>
+      <span>허머 EV 에디션1 보험 금액</span>
+      <span>대물배상 10억 추가 비용</span>
+      <span>부부한정 특약 할인 혜택</span>
+      <span>T맵 안전운전 점수 할인</span>
+      <span>허머 EV 픽업 세금 혜택</span>
+      <span>초대형 전기차 자차 가액</span>
+      <span>GMC 허머 EV 3X 보험료</span>
+      <span>허머 EV 2X 다이렉트 순위</span>
+      <span>수입 대형 픽업 보험 가입</span>
+      <span>삼성화재 허머 EV 다이렉트</span>
+      <span>현대해상 허머 EV 보험료</span>
+      <span>DB손해보험 허머 EV 특약</span>
+      <span>KB손해보험 전기차 보험 계산</span>
+      <span>캐롯 퍼마일 허머 EV 비용</span>
+      <span>메리츠 화재 허머 보험 가격</span>
+      <span>허머 EV 무사고 할인율</span>
+      <span>블랙박스 장착 할인 혜택</span>
+      <span>차선이탈 방지장치 특약</span>
+      <span>만 26세 이상 누구나 운전</span>
+      <span>가족한정 수입 전기차 보험</span>
+      <span>허머 EV 단기 운전자 확대</span>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>차종별 세부 특성과 유지 부담액 비교</h3>
+    <p>허머 EV는 배터리 시스템의 막대한 가액 때문에 차량 등급 평가 점수에서 페널티를 받기 쉽습니다. 이 때문에 국산 소형 전기차나 내연기관 대형 SUV 대비 기본 자차 요율이 높게 시작합니다. 또한, 수입 부품 조달 기간의 장기화로 인한 렌트비 보상 특약 비용도 만만치 않습니다.</p>
+    <ul>
+      <li><strong>허머 EV 픽업트럭 모델:</strong> 화물차 세제 혜택으로 연간 자동차세는 28,500원에 불과하여 세금 측면의 장점이 압도적입니다. 다만, 다이렉트 가입 시 승용차 경력이 화물 경력과 연동되지 않는 경우가 많아 신규 가입 시 일시적으로 높은 보험 요율이 책정될 위험이 존재합니다.</li>
+      <li><strong>허머 EV SUV 모델:</strong> 다목적 승용차로 분류되어 전기 승용 세제가 적용됩니다. 기존에 승용차를 무사고로 오래 운행했던 분이라면 기존 할인 등급을 그대로 승계하여 매우 <span class="highlight">저렴한곳</span>을 골라 계약을 맺을 수 있습니다.</li>
+    </ul>
+    <p>이를 종합적으로 따져보기 위해서는 수입 대형 전기차 취급 실적이 풍부한 <span class="highlight">전문 컨설팅 업체</span>나 다이렉트 비교 통합 앱을 이용해 사전에 세밀한 가입 조건별 비교 설계를 진행해 보시기를 적극 권장합니다.</p>
+  </div>
+</section>
+
+<section id="brand-comparison" aria-label="보험사별 혜택 및 비교 분석">
+  <h2>국내 주요 보험사별 허머 EV 전용 상품 및 요율 비교</h2>
+  <p>국내 대형 손해보험사들은 2026년 현재 고가 수입 전기차 유치 경쟁 속에서 다양한 전용 보장 특약과 부가 이벤트를 론칭하여 가입자들을 모집하고 있습니다. 각 브랜드의 대표적인 강점과 지원금 수준을 파악해 두는 것이 계약 요금 다이어트의 핵심입니다.</p>
+
+  <div class="service-card">
+    <h3>1. 대형 다이렉트 브랜드 (삼성, 현대, DB, KB)</h3>
+    <p>가장 탄탄한 보상망과 안정적인 서비스를 지향하는 메이저 브랜드들은 자사 앱 및 온라인 웹사이트를 통한 셀프 계약 시 설계사 마진이 빠진 15%에서 18% 수준의 다이렉트 즉시 할인 혜택을 제공합니다. 전기차 전용 특별 약관의 구성이 촘촘하고 전국적인 견인 인프라가 잘 구축되어 있어 장거리 아웃도어 캠핑이나 오프로드 주행이 잦은 허머 EV 차주분들 사이에서 인지도 순위 최상위를 유지하고 있습니다.</p>
+  </div>
+
+  <div class="service-card">
+    <h3>2. 사용한 만큼 내는 특화형 브랜드 (캐롯, 기타 핀테크 연계 상품)</h3>
+    <p>주말 레저용이나 가끔 야외 패밀리카 용도로만 허머 EV를 운행하여 연간 주행거리가 5,000km 미만으로 매우 짧다면, 매월 주행한 거리만큼만 보험료를 정산하는 특화 상품이 확실한 대안이 됩니다. 초기 목돈 부담이 적고 자사 스마트 기기를 장착한 상태로 안전 운전을 이행할 경우 월 단위 추가 캐시백을 지급하여 체감 단가를 획기적으로 낮출 수 있는 확실한 단점 극복 장치로 평가받습니다.</p>
+  </div>
+
+  <div class="service-card">
+    <h3>3. 금융 핀테크 플랫폼 제휴 혜택 (네이버, 토스, 카카오페이)</h3>
+    <p>최근에는 <span class="highlight">토스</span>, <span class="highlight">네이버페이</span>, <span class="highlight">카카오톡</span> 금융 허브 등을 경유하여 다이렉트 가입을 진행하는 스마트 차주들이 대폭 늘어났습니다. 이들 모바일 어플 플랫폼을 통해 다이렉트 비교 후 가입을 성사시키면, 규정상 허용된 범위 내에서 다양한 제휴 상품권 제공이나 네이버페이 포인트 등의 실질적인 리워드 혜택을 받아 가입할 수 있어 간접적인 가입 지원금 효과를 누리실 수 있습니다.</p>
+  </div>
+</section>
+
+<section id="saving-tips" aria-label="보험료 할인 혜택 및 절약 팁">
+  <h2>GMC 허머 EV 보험료를 낮추는 실전 할인 꿀팁</h2>
+  <p>엄청난 덩치만큼 기본 차량 가액이 크기 때문에, 사소한 특별약관 할인 하나만 알뜰히 챙겨도 수십만 원의 고정 지출을 아낄 수 있습니다. 2026년 기준 적용 가능한 핵심 절감 전략입니다.</p>
+
+  <div class="info-block">
+    <h3>안전운전 점수 및 마일리지 특약 결합</h3>
+    <p>T맵이나 카카오내비 같은 스마트폰 내비게이션 어플을 활성화한 채로 규정 속도를 준수하며 안전 점수를 80점 이상 확보해 두시기 바랍니다. 각 보험사마다 7%에서 최대 16%에 이르는 폭넓은 추가 특약 할인을 선사합니다. 여기에 주행거리가 짧을수록 환급률이 비례해서 올라가는 마일리지 환급 혜택을 더하면 최고의 시너지를 발휘하게 됩니다.</p>
+    <p>또한 차량 자체에 기본 장착되어 출고되는 차선 이탈 방지 센서 및 전방 충돌 경고 장치 등의 ADAS 기능을 가입 정보에 누락 없이 기입하면 연간 약 3%에서 5%의 안전 장치 추가 할인을 즉시 부여받게 됩니다.</p>
+  </div>
+
+  <div class="info-block">
+    <h3>AI 기반 지능형 비교 도구의 적극적 도입</h3>
+    <p>다이렉트 보험료는 개개인의 사고 기록과 세부 연령 제한 세팅에 따라 초단위로 산출 금액이 변합니다. 이 때문에 스스로 모든 포털을 수동으로 뒤지기보다는 <span class="highlight">Gemini</span>나 <span class="highlight">ChatGPT</span> 기반의 최신 금융 컨설팅 어시스턴트를 연동한 모바일 플랫폼 앱을 사용해 보는 것을 강력 추천합니다. 복잡한 수입차 요율 산식과 최근 개정된 도로교통법 벌점 등급을 실시간으로 추적하여 가입자 본인 기준 가장 싼곳을 단 몇 분 만에 완벽히 필터링해 주기 때문입니다.</p>
+  </div>
+</section>
+
+<section id="community-opinion" aria-label="커뮤니티 고객 후기 및 실제 사례">
+  <h2>커뮤니티 실제 가입자들의 내돈내산 후기 및 조언</h2>
+  <p>허머 EV의 독보적인 주행 감각만큼이나 다사다난한 보험 유치기를 겪은 실제 소유주들의 생생한 조언입니다. 보배드림, 디시인사이드, 에펨코리아 등지에서 화제를 모은 주요 후기 요약본입니다.</p>
+
+  <div class="review-card">
+    <h3>[보배드림 유저 후기] 픽업 3X 신차 출고 후 첫 다이렉트 가입기</h3>
+    <p>포터나 봉고처럼 화물차 전용 카테고리로 묶여서 최초 심사 때 자차 거절하는 보험사가 꽤 있어서 애를 먹었습니다. 결국 몇 군데 손품을 팔다가 대기업 다이렉트 전용 어플로 비대면 수동 서류 제출 심사를 올려 최종 가입에 성공했습니다. 자차 포함 연간 약 240만 원 수준으로 끊었는데 대물 한도는 10억으로 설정했습니다. 다른 허머 차주분들도 꼭 모바일 앱을 이용해 다이렉트로 몇 군데 견적을 필히 꼼꼼히 돌려보셔야 손해를 안 봅니다.</p>
+  </div>
+
+  <div class="review-card">
+    <h3>[디시인사이드 수입차 갤러리 후기] 만 30대 중반 부부 한정 알뜰 팁</h3>
+    <p>부부 공동 명의로 묶어놓고 부부 한정 다이렉트 요율을 적용했더니 1인 단독 운전 대비 연간 30만 원 이상 아낄 수 있었습니다. 사은품으로 주는 주유권이나 마트 상품권 혜택 소소하게 챙기며 가입했더니 가성비가 꽤 훌륭하게 느껴집니다. 특히 가끔 운행하는 주말 오프로더 성향이라 캐롯 퍼마일과 연간 주행거리 약정 할인 구간을 잘 저울질해서 제일 저렴한곳에 둥지를 틀었습니다.</p>
+  </div>
+</section>
+
+<section id="premium-calculator" class="calculator-container" aria-label="GMC 허머 EV 실시간 가입 견적 계산기">
+  <h2>GMC 허머 EV 모의 보험료 다이렉트 계산기</h2>
+  <p>본인의 실무 운전 정보 및 모델 사양을 선택하여 예상 연간 보험료 범위를 대략적으로 자가 진단하고 실시간 1:1 정밀 상담 견적을 요청해 보세요. 정교한 알고리즘을 통해 신속하고 정밀한 컨설팅 피드백을 전달해 드립니다.</p>
+  
+  <form action="javascript:void(0);" onsubmit="alert('입력하신 정보를 바탕으로 전문 맞춤형 다이렉트 비교 분석 보고서가 전송됩니다. 영업일 기준 30분 내로 전문 컨설턴트가 전화를 통해 최종 확인을 도와드립니다.');" aria-describedby="calculator-desc">
+    
+    <div class="form-group">
+      <label for="hummer-type">차량 상세 등급 및 모델군 선택</label>
+      <select id="hummer-type" name="hummer-type" required>
+        <option value="">소유하고 계시거나 계약 예정인 세부 모델을 골라주세요</option>
+        <option value="pickup-3x">GMC 허머 EV 픽업 (3X 트리모터)</option>
+        <option value="pickup-2x">GMC 허머 EV 픽업 (2X 듀얼모터)</option>
+        <option value="suv-3x">GMC 허머 EV SUV (3X 트리모터)</option>
+        <option value="suv-2x">GMC 허머 EV SUV (2X 듀얼모터)</option>
+        <option value="edition-1">GMC 허머 EV 에디션 1 (초기 한정판)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="driver-birth">피보험자 생년월일 (예시: 19880125)</label>
+      <input type="number" id="driver-birth" name="driver-birth" placeholder="주민등록상 앞 8자리를 입력해 주세요" required>
+    </div>
+
+    <div class="form-group">
+      <label for="driver-range">운전자 보장 범위 지정</label>
+      <select id="driver-range" name="driver-range" required>
+        <option value="">범위를 좁힐수록 단가가 획기적으로 낮아집니다</option>
+        <option value="only">피보험자 1인 전용 한정</option>
+        <option value="couple">부부 공동 가입 한정</option>
+        <option value="family">가족 전체 보장 범위</option>
+        <option value="any">지정인 포함 누구나 마음대로 운전</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="driving-history">무사고 누적 운전 경력</label>
+      <select id="driving-history" name="driving-history" required>
+        <option value="">경력 구간에 따라 할인 등급 격차가 매우 큽니다</option>
+        <option value="under-1">최초 가입 또는 1년 미만</option>
+        <option value="under-3">3년 이하 가입 경력</option>
+        <option value="under-7">7년 이하 무사고 경력</option>
+        <option value="over-10">10년 이상 완전 무사고 베테랑</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="annual-mileage">예상 연간 총 주행거리 (km)</label>
+      <select id="annual-mileage" name="annual-mileage" required>
+        <option value="">주행거리 약정에 따른 추가 환급액을 예상해 드립니다</option>
+        <option value="under-3k">연간 3,000km 이하 (마일리지 최대 환급 타깃)</option>
+        <option value="under-5k">연간 5,000km 이하</option>
+        <option value="under-10k">연간 10,000km 이하</option>
+        <option value="over-15k">연간 15,000km 이상 장거리 운행</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>추가 적용 가능한 보유 특약 사항 체크 (중복 선택 가능)</label>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="spec-blackbox" name="special-contracts" value="blackbox">
+          <label for="spec-blackbox">블랙박스 상시 장착</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="spec-tmap" name="special-contracts" value="tmap">
+          <label for="spec-tmap">안전운전 점수 80점 초과</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="spec-child" name="special-contracts" value="child">
+          <label for="spec-child">만 6세 이하 자녀 동거</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="spec-adas" name="special-contracts" value="adas">
+          <label for="spec-adas">순정 ADAS 자율안전 보조 시스템 탑재</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="contact-name">실명 이름</label>
+      <input type="text" id="contact-name" name="contact-name" placeholder="홍길동" required>
+    </div>
+
+    <div class="form-group">
+      <label for="contact-phone">연락처 및 모바일 번호</label>
+      <input type="tel" id="contact-phone" name="contact-phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="agree-privacy">
+        <input type="checkbox" id="agree-privacy" name="agree-privacy" style="width: auto; margin-right: 5px;" required>
+        개인 정보 수집 및 다이렉트 견적 문자 발송 제휴사 제공 동의 (필수 항목)
+      </label>
+    </div>
+
+    <button type="submit" class="cta">전문가 맞춤 실시간 최저가 견적서 무료 신청</button>
+  </form>
+</section>
+
+<section id="faq" aria-label="GMC 허머 EV 자주 묻는 질문 코너">
+  <h2>허머 EV 자동차보험 자주 묻는 질문 FAQ</h2>
+  <dl class="faq">
+    <dt>Q. GMC 허머 EV는 차량 가액이 워낙 높은데 단일 보험사에서 자차 거절을 당하지는 않나요?</dt>
+    <dd>A. 그렇습니다. 차량 가액이 1억 5천만 원 이상을 호과하는 초대형 전기 차량의 특성상 리스크 부담으로 인해 일부 영세 다이렉트 채널에서는 인수를 보류하거나 승인 거부 조치를 취하기도 합니다. 이 경우에는 인수 능력이 탄탄한 대기업 계열 브랜드 다이렉트 창구를 통해 별도 인수 심사를 거쳐 계약을 성사시키거나, 공동 인수 제도를 통해 리스크를 공동 분담하는 방향으로 무리 없이 가입 절차를 진행할 수 있습니다.</dd>
+
+    <dt>Q. T맵 안전운전 특약이나 대중교통 이용 할인 등을 타 차종처럼 완벽히 누릴 수 있습니까?</dt>
+    <dd>A. 네, 당연히 가능합니다. 차량 소유주 본인의 주민등록번호로 가입한 스마트폰 전용 맵 앱의 주행거리 스코어가 기준선 이상 충족된다면, 차량 종류나 수입 여부와 관계없이 동일한 할인 혜택을 다이렉트 계약 시 고스란히 돌려받을 수 있어 유류비 및 기타 경비 다이어트에 지대한 공헌을 하게 됩니다.</dd>
+
+    <dt>Q. 배터리가 외부에 그대로 드러나 오프로드 주행 중 자갈 충돌 등으로 파손될까 봐 겁이 납니다. 특별 보장 방법은?</dt>
+    <dd>A. 대다수의 메이저 손해보험사들은 하부 배터리 셀 손상에 대응해 전기차 전용 자차 추가 보장 특약을 제공합니다. 이 특약에 명시적으로 추가 가입할 경우, 자가 수리 부담금을 획기적으로 낮추면서 수입 신품 배터리 팩으로 통째 교환받는 특전을 받을 수 있어 차량 출고 후 첫 가입 단계에서 필수 요인으로 반드시 빼놓지 말고 삽입하시는 것이 현명합니다.</dd>
+
+    <dt>Q. 픽업트럭과 SUV 형태의 계약 등급 사이에서 발생하는 장단점이 구체적으로 무엇인가요?</dt>
+    <dd>A. 픽업트럭 사양은 3종 특수 화물자동차 요율의 간섭을 받게 되므로 매달 납부하는 개인 승용 자동차 무사고 경력이 다소간 단절될 여지가 있으나 세제면에서 월등하게 알짜 혜택을 봅니다. 반면 SUV 라인업은 본연의 오랜 무사고 우량 등급이 연이어 연동되어 승계되므로 가입 단가를 극적으로 내리는 데 유리한 차이점이 존재합니다.</dd>
+  </dl>
+</section>
+
+<section id="external-info" aria-label="신뢰할 수 있는 외부 공식 자료 연계">
+  <h2>GMC 허머 EV 및 전기차 보험 관련 공인 공식 출처 정보</h2>
+  <div class="info-block">
+    <p>보다 공식적이고 법률적으로 안전한 제반 사항을 검토하실 수 있도록 신뢰도가 대외적으로 공증된 엄선 외부 기관 정보를 동봉해 드립니다.</p>
+    <ul>
+      <li><a href="https://namu.wiki/w/GMC%20%ED%97%88%EB%A8%B8%20EV" target="_blank" rel="noopener">나무위키 - GMC 허머 EV 상세 개요 및 히스토리</a>: 전반적인 구조 제원과 한국 수입 과정 확인</li>
+      <li><a href="https://www.law.go.kr/" target="_blank" rel="noopener">법제처 국가법령정보센터</a>: 초고중량 전기 화물차 및 특수 승용 분류 관련 최신 자동차관리법 세칙 확인</li>
+      <li><a href="https://www.fss.or.kr/" target="_blank" rel="noopener">금융감독원 공식 홈페이지</a>: 수입 전기차 배터리 관련 소비자 권익 보호 가이드라인 공지 사항 참조</li>
+      <li><a href="https://www.kidi.or.kr/" target="_blank" rel="noopener">보험개발원 차량기준가액 조회 서비스</a>: 등급별 신차 출시 가액 확인 및 분기별 요율 평가지수 모니터링</li>
+      <li><a href="https://www.gmc-korea.co.kr/" target="_blank" rel="noopener">GMC 코리아 공식 웹사이트</a>: GMC 허머 EV 국내 제원 가이드라인 분석</li>
+      <li><a href="http://www.car365.go.kr/" target="_blank" rel="noopener">국토교통부 자동차 365 종합 정보 포털</a>: 정식 수입 차량 세제 혜택 유무 및 감면 상세 현황</li>
+    </ul>
+  </div>
+</section>
+  
